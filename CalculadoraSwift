@@ -1,0 +1,57 @@
+import Foundation
+
+print("Digite la operación a realizar")
+let operacion = readLine()!
+var indice:[Set<Int>.Index] = []
+
+let operacionesAceptadas = ["*", "/", "+", "-"]
+
+var numeros = [Int]()
+var operadores = [String]()
+var temporal = ""
+var resultado = 0
+var resultadoF = 0
+
+for caracter in operacion{
+        if operacionesAceptadas.contains(String(caracter)){
+                operadores.append(String(caracter))
+                numeros.append(Int(temporal)!)
+                temporal = ""
+		}else{
+                temporal += String(caracter)
+        }
+}
+
+if !temporal.isEmpty{
+        numeros.append(Int(temporal)!)
+}
+
+func resultadoF(_operaciones:[Int]) -> Int {
+
+        for (i, numero) in zip(numeros.indices, numeros){
+
+                for  operador in operadores{
+
+                        switch  operador{
+
+                        case "*":
+                        resultadoF += numeros[i] * numeros[i+1]
+
+                        case "/":
+                        resultadoF += numeros[i]  / numeros[i+1]
+
+                        case "+":
+                        resultadoF += numeros[i] + numeros[i+1]
+
+                        default:
+                        resultadoF += numeros[i] - numeros[i+1]
+
+                        }
+
+                }
+                resultado += resultadoF
+
+        }
+        return resultado
+}
+print(resultado)
